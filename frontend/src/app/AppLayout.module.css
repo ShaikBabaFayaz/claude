@@ -1,0 +1,70 @@
+.app {
+  min-height: 100vh;
+}
+
+.skipLink {
+  position: absolute;
+  left: var(--space-2);
+  top: -4rem;
+  z-index: 10;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border-radius: var(--radius);
+}
+
+.skipLink:focus {
+  top: var(--space-2);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.brand {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.navList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navLink {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+}
+
+.navLink:hover {
+  text-decoration: underline;
+}
+
+/* The current page is marked by shape (underline + border) as well as colour. */
+.navLink[aria-current='page'] {
+  border-color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.main {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: var(--space-4);
+}

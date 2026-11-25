@@ -1,0 +1,112 @@
+{
+  "description": "Shared email test vectors for backend (LibraryEmailValidator) and frontend (validators.ts). See README.md.",
+  "formatVersion": 1,
+  "valid": [
+    {
+      "input": "ada@example.org",
+      "note": "plain address"
+    },
+    {
+      "input": "Ada.Lovelace@Example.ORG",
+      "note": "mixed case; lower-cased only for the uniqueness key"
+    },
+    {
+      "input": "a@b.co",
+      "note": "shortest realistic form"
+    },
+    {
+      "input": "a@b.c",
+      "note": "single-character labels"
+    },
+    {
+      "input": "first+tag@sub.example.co.uk",
+      "note": "plus tag and several domain labels"
+    },
+    {
+      "input": "o'brien@example.ie",
+      "note": "apostrophe in the local part"
+    },
+    {
+      "input": "first_last-name@my-domain.example",
+      "note": "underscore, hyphens"
+    },
+    {
+      "input": "user@xn--bcher-kva.example",
+      "note": "punycode domain label"
+    },
+    {
+      "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@b.co",
+      "note": "exactly 254 characters (the maximum)"
+    }
+  ],
+  "invalid": [
+    {
+      "input": "",
+      "note": "empty"
+    },
+    {
+      "input": "   ",
+      "note": "only spaces"
+    },
+    {
+      "input": "ada",
+      "note": "no @"
+    },
+    {
+      "input": "ada.example.org",
+      "note": "no @, has dots"
+    },
+    {
+      "input": "ada@",
+      "note": "empty domain"
+    },
+    {
+      "input": "@example.org",
+      "note": "empty local part"
+    },
+    {
+      "input": "ada@@example.org",
+      "note": "two @ in a row"
+    },
+    {
+      "input": "a@b@example.org",
+      "note": "two @"
+    },
+    {
+      "input": "ada@example",
+      "note": "domain without a dot"
+    },
+    {
+      "input": "ada@.org",
+      "note": "empty first domain label"
+    },
+    {
+      "input": "ada@example.",
+      "note": "empty last domain label"
+    },
+    {
+      "input": "ada@example..org",
+      "note": "empty middle domain label"
+    },
+    {
+      "input": "ada@.",
+      "note": "domain is only a dot"
+    },
+    {
+      "input": "ada lovelace@example.org",
+      "note": "space in the local part"
+    },
+    {
+      "input": "ada@exa mple.org",
+      "note": "space in the domain"
+    },
+    {
+      "input": "ada\t@example.org",
+      "note": "tab in the local part"
+    },
+    {
+      "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@b.co",
+      "note": "255 characters (one over the maximum)"
+    }
+  ]
+}

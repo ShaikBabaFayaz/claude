@@ -1,0 +1,19 @@
+# local runtime and editor files
+workflow/
+.claude/settings.local.json
+.vscode/
+
+# agent framework stays local (stage docs under .claude/docs/ are tracked)
+.claude/agents/
+.claude/skills/
+.claude/commands/
+.claude/hooks/
+.claude/settings.json
+CLAUDE.md
+.mcp.json
+
+# build output and dependencies
+target/
+node_modules/
+dist/
+*.log
