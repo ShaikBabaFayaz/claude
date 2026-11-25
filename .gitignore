@@ -1,8 +1,9 @@
 # local runtime and editor files
 workflow/
 .vscode/
+docs/
 
-
+CHANGELOG.md
 # build output and dependencies
 target/
 node_modules/
