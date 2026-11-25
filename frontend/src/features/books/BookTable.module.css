@@ -1,0 +1,15 @@
+.title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.isbn {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

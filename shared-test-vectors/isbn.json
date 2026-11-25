@@ -1,0 +1,166 @@
+{
+  "description": "Shared ISBN test vectors for backend (IsbnValidator/IsbnNormalizer) and frontend (validators.ts). See README.md.",
+  "formatVersion": 1,
+  "valid": [
+    {
+      "input": "0306406152",
+      "normalized": "0306406152",
+      "note": "ISBN-10, plain"
+    },
+    {
+      "input": "9780306406157",
+      "normalized": "9780306406157",
+      "note": "ISBN-13, plain; the ISBN-13 form of 0306406152 (stored as a different value, Q-A1)"
+    },
+    {
+      "input": "0-306-40615-2",
+      "normalized": "0306406152",
+      "note": "ISBN-10 with hyphens"
+    },
+    {
+      "input": "0 306 40615 2",
+      "normalized": "0306406152",
+      "note": "ISBN-10 with spaces"
+    },
+    {
+      "input": "978-0-306-40615-7",
+      "normalized": "9780306406157",
+      "note": "ISBN-13 with hyphens"
+    },
+    {
+      "input": "978 0 306 40615 7",
+      "normalized": "9780306406157",
+      "note": "ISBN-13 with spaces"
+    },
+    {
+      "input": "080442957X",
+      "normalized": "080442957X",
+      "note": "ISBN-10 with check digit X"
+    },
+    {
+      "input": "080442957x",
+      "normalized": "080442957X",
+      "note": "ISBN-10 with lower-case x; normalised to upper-case X"
+    },
+    {
+      "input": "0-8044-2957-x",
+      "normalized": "080442957X",
+      "note": "ISBN-10 with hyphens and lower-case x"
+    },
+    {
+      "input": "0132350882",
+      "normalized": "0132350882",
+      "note": "ISBN-10 (Clean Code)"
+    },
+    {
+      "input": "9780132350884",
+      "normalized": "9780132350884",
+      "note": "ISBN-13 (Clean Code)"
+    },
+    {
+      "input": "9781617294945",
+      "normalized": "9781617294945",
+      "note": "ISBN-13 (Spring in Action)"
+    },
+    {
+      "input": "  978 0306406157  ",
+      "normalized": "9780306406157",
+      "note": "ISBN-13 with surrounding spaces; spaces are ignored"
+    },
+    {
+      "input": "9780000000002",
+      "normalized": "9780000000002",
+      "note": "ISBN-13 with many zeros"
+    },
+    {
+      "input": "0000000000",
+      "normalized": "0000000000",
+      "note": "ISBN-10 of all zeros: the check sum is 0, so it is valid by the algorithm"
+    }
+  ],
+  "invalid": [
+    {
+      "input": "0306406153",
+      "note": "ISBN-10 with a wrong check digit"
+    },
+    {
+      "input": "9780306406158",
+      "note": "ISBN-13 with a wrong check digit"
+    },
+    {
+      "input": "0-306-40615-3",
+      "note": "ISBN-10 with hyphens and a wrong check digit"
+    },
+    {
+      "input": "978-0-306-40615-8",
+      "note": "ISBN-13 with hyphens and a wrong check digit"
+    },
+    {
+      "input": "030640615",
+      "note": "9 characters"
+    },
+    {
+      "input": "03064061522",
+      "note": "11 characters"
+    },
+    {
+      "input": "978030640615",
+      "note": "12 characters"
+    },
+    {
+      "input": "97803064061570",
+      "note": "14 characters"
+    },
+    {
+      "input": "",
+      "note": "empty"
+    },
+    {
+      "input": "   ",
+      "note": "only spaces"
+    },
+    {
+      "input": "-",
+      "note": "only a hyphen"
+    },
+    {
+      "input": "ABCDEFGHIJ",
+      "note": "letters only"
+    },
+    {
+      "input": "978030640615X",
+      "note": "X is only allowed as the last character of an ISBN-10, never in an ISBN-13"
+    },
+    {
+      "input": "03064X6152",
+      "note": "X not in the last position"
+    },
+    {
+      "input": "0x30640615",
+      "note": "lower-case x not in the last position"
+    },
+    {
+      "input": "0306406152x",
+      "note": "11 characters ending in x"
+    },
+    {
+      "input": "97803064061５7",
+      "note": "contains a full-width digit (only ASCII digits 0-9 are digits)"
+    },
+    {
+      "input": "0306406l52",
+      "note": "letter l instead of digit 1"
+    },
+    {
+      "input": "978-0-306-4061",
+      "note": "too short with hyphens"
+    }
+  ],
+  "notEquivalent": [
+    {
+      "a": "0306406152",
+      "b": "9780306406157",
+      "note": "ISBN-10 and its ISBN-13 equivalent are both valid and are different values after normalisation (Q-A1)."
+    }
+  ]
+}

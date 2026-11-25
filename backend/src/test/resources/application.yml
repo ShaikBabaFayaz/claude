@@ -1,0 +1,49 @@
+# Test overrides. Spring Boot loads this file instead of src/main/resources/application.yml
+# on the test classpath, so every property the tests rely on is listed here (DR-9).
+spring:
+  application:
+    name: library-backend
+  datasource:
+    # unique in-memory database per Spring context
+    url: jdbc:h2:mem:${random.uuid};DB_CLOSE_DELAY=-1;LOCK_TIMEOUT=5000
+  sql:
+    init:
+      mode: embedded
+  jpa:
+    open-in-view: false
+    hibernate:
+      # same as main: schema.sql creates the tables, Hibernate validates (D2)
+      ddl-auto: validate
+  h2:
+    console:
+      enabled: false
+
+server:
+  port: 8080
+  address: 127.0.0.1
+  error:
+    include-stacktrace: never
+    include-message: never
+    whitelabel:
+      enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
+logging:
+  level:
+    # same as main: keep row values (names, emails) out of the log (DR-14)
+    org.hibernate.engine.jdbc.spi.SqlExceptionHelper: "OFF"
+
+library:
+  demo-data:
+    enabled: false
+  security:
+    allowed-hosts: localhost:8080,127.0.0.1:8080,localhost:5173,127.0.0.1:5173
+    allowed-origins: http://localhost:8080,http://127.0.0.1:8080,http://localhost:5173,http://127.0.0.1:5173
