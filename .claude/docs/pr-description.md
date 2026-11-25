@@ -39,6 +39,9 @@ Nothing in this PR is merged automatically; merging is a separate decision.
 - `.claude/docs/*.md`: stage documents (requirements, architecture, design review, implementation plan, code review, verification report).
 - `CHANGELOG.md`: first entry (Keep a Changelog style).
 
+**Agent framework (`.claude/`, `CLAUDE.md`, `.mcp.json`)**
+- The diff also contains the agentic SDLC framework that produced this work: an orchestrator plus 8 stage agents (`.claude/agents/`), stage skills (`.claude/skills/`), slash commands (`.claude/commands/`), guard hooks (`.claude/hooks/`), the shared settings (`.claude/settings.json`, `.claude/settings.local.json`), the project rules in `CLAUDE.md`, and the GitHub MCP server config `.mcp.json` (the token is read from an environment variable, no literal credential).
+
 **Design highlights** (details in `.claude/docs/architecture.md`)
 - **Concurrency**: checkout and return take pessimistic write row locks (JPA `PESSIMISTIC_WRITE`) in the fixed order loan -> member -> book, and the update, delete and deactivate/reactivate paths of `BookService` and `MemberService` take their row lock before reading state. The active-loan counters on `book` and `member` change only through the `LoanService` use cases and the demo-data seeder.
 - **Database backstops**: CHECK constraints on the counters and a UNIQUE key against a duplicate active loan; a JPA `@Version` column on `book` and `member` guards against lost updates.
@@ -67,7 +70,7 @@ Versions in use: Spring Boot 3.5.16, Java 21, React 19, Vite 7.
 
 ## Reviewer Checklist
 
-- [ ] Scope of the diff: `.gitignore` excludes `target/`, `node_modules/`, `dist/` and `*.log`; confirm the diff contains only `backend/`, `frontend/`, `shared-test-vectors/`, `.claude/docs/*.md`, root `README.md`, `CHANGELOG.md` and `.gitignore`, and none of the agent-framework files, `workflow/`, `.mcp.json`, `CLAUDE.md`, `.codemie/` or the existing `docs/` folder.
+- [ ] Scope of the diff: `.gitignore` excludes `target/`, `node_modules/`, `dist/` and `*.log`; confirm the diff contains `backend/`, `frontend/`, `shared-test-vectors/`, root `README.md`, `CHANGELOG.md` and `.gitignore`, plus the stage documents in `.claude/docs/*.md` and the agent framework (`.claude/agents`, `.claude/commands`, `.claude/hooks`, `.claude/skills`, `.claude/settings.json`, `.claude/settings.local.json`, `CLAUDE.md`, `.mcp.json`), and still excludes `workflow/`, build output (`target/`, `dist/`, `node_modules/`), `.codemie/` and the existing `docs/` folder.
 - [ ] Architecture conformance: feature packages and layering match `.claude/docs/architecture.md` (sections 4 and 7).
 - [ ] Concurrency: every write path to `book` and `member` takes its row lock before reading state, in the order loan -> member -> book; counters change only through `LoanService` and the seeder.
 - [ ] Schema: `backend/src/main/resources/schema.sql` constraints (CHECK counters, UNIQUE active loan, unique ISBN and email) match the entities.
@@ -77,6 +80,7 @@ Versions in use: Spring Boot 3.5.16, Java 21, React 19, Vite 7.
 - [ ] Configuration: ports 8080 (backend) and 5173 (frontend, `strictPort`) are consistent with the allowlists; demo data flag `library.demo-data.enabled`.
 - [ ] Frontend: forms have associated labels and inline errors; status is conveyed by text; destructive actions (delete book, deactivate member, return book) ask for confirmation.
 - [ ] Docs: the `README.md` Run, Tests, Security settings and API sections match the code; `CHANGELOG.md` entry is accurate.
+- [ ] Agent framework files: `.mcp.json` holds only the `${GITHUB_PAT}` environment-variable reference and no literal token; the guard hooks in `.claude/hooks/` match the rules in `CLAUDE.md`.
 - [ ] Jira keys in this description (AG-23..AG-35) match the published tickets.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)

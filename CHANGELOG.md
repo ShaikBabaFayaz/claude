@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - API documentation: OpenAPI at `/v3/api-docs`, Swagger UI at `/swagger-ui.html`, and a health check at `/actuator/health`.
 - Root `README.md` with prerequisites, run and test commands, security settings, API endpoint table and error format.
 - Shared ISBN and email test vectors (`shared-test-vectors/`) used by both test suites.
+- Agentic SDLC framework files (`.claude/` agents, skills, commands, hooks and settings, `CLAUDE.md`, `.mcp.json`) are now included in the repository.
 
 ### Security
 

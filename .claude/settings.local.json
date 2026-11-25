@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -nE \"^#{2,3} \" impl-plan.md)",
+      "Bash(grep -cE \"^#{2,4} T-[0-9]+\" impl-plan.md)",
+      "Bash(cd *)",
+      "Bash(mvn -B dependency:tree)",
+      "Bash(echo \"EXIT=$?\")",
+      "Read(//tmp/**)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "github"
+  ]
+}
