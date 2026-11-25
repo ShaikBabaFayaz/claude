@@ -37,7 +37,8 @@ Nothing in this PR is merged automatically; merging is a separate decision.
 **Docs and changelog**
 - Root `README.md`: prerequisites, run and test commands, security settings, API endpoint table, error format.
 - `.claude/docs/*.md`: stage documents (requirements, architecture, design review, implementation plan, code review, verification report).
-- `CHANGELOG.md`: first entry (Keep a Changelog style).
+- `CHANGELOG.md`: first entry (Keep a Changelog style). The file is tracked and in the diff although `.gitignore` now lists it.
+- `.gitignore`: ignores `workflow/`, `.vscode/`, `docs/` (the unrelated codemie analytics folder, not part of this diff), `CHANGELOG.md`, `target/`, `node_modules/`, `dist/` and `*.log`; the `.claude/` folder is tracked.
 
 **Agent framework (`.claude/`, `CLAUDE.md`, `.mcp.json`)**
 - The diff also contains the agentic SDLC framework that produced this work: an orchestrator plus 8 stage agents (`.claude/agents/`), stage skills (`.claude/skills/`), slash commands (`.claude/commands/`), guard hooks (`.claude/hooks/`), the shared settings (`.claude/settings.json`, `.claude/settings.local.json`), the project rules in `CLAUDE.md`, and the GitHub MCP server config `.mcp.json` (the token is read from an environment variable, no literal credential).
@@ -70,7 +71,7 @@ Versions in use: Spring Boot 3.5.16, Java 21, React 19, Vite 7.
 
 ## Reviewer Checklist
 
-- [ ] Scope of the diff: `.gitignore` excludes `target/`, `node_modules/`, `dist/` and `*.log`; confirm the diff contains `backend/`, `frontend/`, `shared-test-vectors/`, root `README.md`, `CHANGELOG.md` and `.gitignore`, plus the stage documents in `.claude/docs/*.md` and the agent framework (`.claude/agents`, `.claude/commands`, `.claude/hooks`, `.claude/skills`, `.claude/settings.json`, `.claude/settings.local.json`, `CLAUDE.md`, `.mcp.json`), and still excludes `workflow/`, build output (`target/`, `dist/`, `node_modules/`), `.codemie/` and the existing `docs/` folder.
+- [ ] Scope of the diff: the final `.gitignore` ignores `workflow/`, `.vscode/`, `docs/`, `CHANGELOG.md`, `target/`, `node_modules/`, `dist/` and `*.log`. Confirm the diff contains `backend/`, `frontend/`, `shared-test-vectors/`, root `README.md` and the updated `.gitignore`, plus the `.claude/` folder (agents, commands, hooks, skills, settings and the stage documents in `.claude/docs/*.md`), `CLAUDE.md` and `.mcp.json`, which are tracked. `CHANGELOG.md` is also tracked and in the diff even though it is listed in `.gitignore` (it was added before it was ignored). The diff must not contain `workflow/`, build output (`target/`, `dist/`, `node_modules/`), `.codemie/` or the unrelated `docs/` folder (codemie analytics, ignored).
 - [ ] Architecture conformance: feature packages and layering match `.claude/docs/architecture.md` (sections 4 and 7).
 - [ ] Concurrency: every write path to `book` and `member` takes its row lock before reading state, in the order loan -> member -> book; counters change only through `LoanService` and the seeder.
 - [ ] Schema: `backend/src/main/resources/schema.sql` constraints (CHECK counters, UNIQUE active loan, unique ISBN and email) match the entities.
